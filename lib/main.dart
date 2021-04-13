@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'BottomNavBar.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -32,27 +34,25 @@ class _myHomePageState extends State<myHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView.builder(
-        itemBuilder: (context, index) {
-          return Container(
-            child: Row(
-              children: [
-                Icon(
-                  Icons.attach_money,
-                  color: Colors.blue,
-                ),
-                Text(
-                  '$index',
-                  style: TextStyle(
-                    color: Colors.blue,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20.0,
-                  ),
-                ),
-              ],
+      body: Center(
+        child: AnimatedContainer(
+          duration: Duration(milliseconds: 500),
+          curve: Curves.easeInOutCubic,
+          height: count % 2 == 0 ? 100 : 300,
+          width: count % 2 == 0 ? 100 : 300,
+          decoration: BoxDecoration(
+              color: count % 2 == 0 ? Colors.pink : Colors.blue,
+              borderRadius: BorderRadius.circular(count % 2 == 0 ? 0 : 500)),
+          child: Center(
+              child: Text(
+            count % 2 == 0 ? "Hello" : "THIS IS AN ANIMATION",
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 20.0,
             ),
-          );
-        },itemCount:count
+          )),
+        ),
       ),
       floatingActionButton: FloatingActionButton.extended(
           onPressed: () {
@@ -62,6 +62,30 @@ class _myHomePageState extends State<myHomePage> {
           },
           icon: Icon(Icons.add),
           label: Text("Click me")),
+      bottomNavigationBar: BottomNavBar(),
     );
   }
 }
+
+// ListView.builder(
+//   itemBuilder: (context, index) {
+//     return Container(
+//       child: Row(
+//         children: [
+//           Icon(
+//             Icons.attach_money,
+//             color: Colors.blue,
+//           ),
+//           Text(
+//             '$index',
+//             style: TextStyle(
+//               color: Colors.blue,
+//               fontWeight: FontWeight.bold,
+//               fontSize: 20.0,
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   },itemCount:count
+// ),
